@@ -1,0 +1,85 @@
+1- 
+# Criar propriedade irmão
+PREFIX : <http://prc.di.uminho.pt/2021/myfamily#>
+CONSTRUCT {
+    ?s1 :irmao ?s2 .
+    ?s2 :irmao ?s1 .
+} WHERE {
+    ?s1 :temProgenitor ?p1.
+    ?s2 :temProgenitor ?p1.
+}
+
+# Propriedade para Tio 
+
+PREFIX : <http://di.uminho.pt/daniel/myfamily#>
+CONSTRUCT {
+    ?s1 :tio ?s3 .
+    ?s3 :temProgenitor ?s2 .
+} WHERE {
+    ?s1 :irmao ?s2.
+    ?s3 :temProgenitor ?p2.
+}
+
+2- 
+
+PREFIX : <http://prc.di.uminho.pt/2021/myfamily#>
+CONSTRUCT {
+    ?p4 :trisavo ?s1 .
+
+} WHERE {
+    ?s1 :temProgenitor ?p1 .
+    ?p1 :temProgenitor ?p2 .
+    ?p2 :temProgenitor ?p3 .
+    ?p3 :temProgenitor ?p4 .
+
+}
+
+3- 
+
+PREFIX : <http://prc.di.uminho.pt/2021/myfamily#>
+CONSTRUCT {
+    ?s1 :ascendente ?s2 .
+
+} WHERE {
+    ?s1 :eProgenitorDe ?s2 .
+
+}
+
+4- 
+
+# É irmão, mas nao tem os mesmos ascendentes
+
+PREFIX : <http://prc.di.uminho.pt/2021/myfamily#>
+CONSTRUCT {
+    ?s1 :meio-irmao ?s2 .
+    ?s2 :meio-irmao ?s1 .
+
+} WHERE {
+
+}
+
+5- 
+
+PREFIX : <http://prc.di.uminho.pt/2021/myfamily#>
+CONSTRUCT {
+    ?m :sexo "F" . 
+    ?p :sexo "M" .
+
+} WHERE {
+    ?s1 :temMae ?m .
+    ?s2 :temPai ?p .
+
+}
+
+6- 
+
+PREFIX : <http://prc.di.uminho.pt/2021/myfamily#>
+CONSTRUCT {
+    :José_Carlos_Leite_Ramalho_1967 :temRelacaoCom ?p .
+    :José_Carlos_Leite_Ramalho_1967 :temRelacaoCom ?p2 .
+
+} WHERE {
+    ?p ?pro :José_Carlos_Leite_Ramalho_1967 .
+    :José_Carlos_Leite_Ramalho_1967 ?pro2 ?p2 .
+
+}
