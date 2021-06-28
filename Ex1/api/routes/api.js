@@ -35,6 +35,13 @@ router.get('/atores', (req, res) => {
 })
 
 
+router.get('/atores/:id', (req, res) => {
+  graphDB.fetch(`select ?s where { ?s rdf:type :Filme ; :temAutor ?m . ?m :nome "${req.params.id}"}`)
+  .then(resp => {
+    res.jsonp(resp.data)
+  })
+})
+
 
 
 module.exports = router;
